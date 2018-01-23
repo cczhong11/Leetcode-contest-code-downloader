@@ -94,7 +94,7 @@ class Contest_download(object):
             self.read_from_data()
             question_name = self.find_question(question_id)
         lang = ''
-        print(response['lang'])
+        print("downloading for {0}".format(question_name))
         if response['lang'] == 'python':
             lang = 'py'
         elif response['lang'] == 'java':
@@ -120,5 +120,7 @@ class Contest_download(object):
                 self.download_code(num, question_id)
 
 
-q = Contest_download(20)
-q.download()
+if __name__ == "__main__":
+    contest_id = input("Which contest you want to download:")
+    q = Contest_download(int(contest_id))
+    q.download()

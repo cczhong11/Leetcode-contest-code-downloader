@@ -7,6 +7,12 @@ import sys
 import re
 import requests
 
+question_id_map = {}
+question_id_map["787"] = 771
+question_id_map["788"] = 773
+question_id_map["790"] = 774
+question_id_map["782"] = 775
+
 
 class Contest_download(object):
 
@@ -105,7 +111,7 @@ class Contest_download(object):
         with open("{2}/{0}/{0}_{1}.{3}".format(question_name, response['id'], path, lang), 'w') as f:
             f.write(response['code'])
 
-        self.code_count[question_id] += 1
+        #self.code_count[question_id] += 1
 
     def download(self):
 
@@ -115,6 +121,8 @@ class Contest_download(object):
                 # for contest 68 you have to replace k with  str(int(k) - 11)
                 if self.contest_id == 68:
                     question_id = str(int(k) - 11)
+                elif self.contest_id == 69:
+                    question_id = question_id_map[k]
                 else:
                     question_id = k
                 self.download_code(num, question_id)
